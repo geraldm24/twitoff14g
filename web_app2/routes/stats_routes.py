@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from sklearn.datasets import load_iris
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 
 from .models import User
 from .basilica_service import connection as basilica_connection
@@ -33,7 +33,8 @@ def twitoff_prediction():
     # inputs: embeddings for each tweet
     # labels: screen name for each tweet
 
-    model = LogisticRegression(max_iter=1000)
+    model = RandomForestClassifier(n_estimators=100,random_state=42,max_depth = 16,min_samples_leaf = 14,
+              min_samples_split=8 )
 
     user_a = User.query.filter(User.screen_name == screen_name_a).one()
     user_b = User.query.filter(User.screen_name == screen_name_b).one()

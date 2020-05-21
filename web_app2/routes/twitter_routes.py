@@ -18,7 +18,7 @@ def fetch_user_data(screen_name=None):
     #new_book = Book(title=request.form["book_title"], author_id=request.form["author_name"])
     #db.session.add(new_book)
     #db.session.commit()
-
+    # you can run len(db.user.tweets) for the length
     #
     # STORE USER
     #
@@ -29,6 +29,7 @@ def fetch_user_data(screen_name=None):
     db_user.name = twitter_user.name
     db_user.location = twitter_user.location
     db_user.followers_count = twitter_user.followers_count
+    db_user.tweets = twitter_user.tweets
     db.session.add(db_user)
     db.session.commit()
     

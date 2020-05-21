@@ -16,6 +16,8 @@ requests = "*"
 scikit-learn = {extras = ["alldeps"],version = "*"}
 scipy = "*"
 matplotlib = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
