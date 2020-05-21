@@ -14,14 +14,14 @@ from web_app2.routes.stats_routes import stats_routes
 
 load_dotenv()
 
-
+DATABASE_URI = os.getenv("DATABASE_URI")
 
 def create_app():
     app = Flask(__name__)
     #app.config["SECRET_KEY"] = SECRET_KEY # required for flash messaging
 
     # configure the database:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///webapp14.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
     migrate.init_app(app, db)
