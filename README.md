@@ -17,6 +17,5 @@ set FLASK_APP=web_app2 flask db upgrade
 ## Usage
 
 ```sh
-insert a twitter handle to enter into the database so
-a prediction can be made
+Insert a twitter handle to enter into the database 
 ```
