@@ -13,6 +13,9 @@ basilica = "*"
 tweepy = "*"
 python-dotenv = "*"
 requests = "*"
+scikit-learn = {extras = ["alldeps"],version = "*"}
+scipy = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"

@@ -30,7 +30,7 @@ if __name__ == "__main__":
     print(user.screen_name)
     print(user.name)
     print(user.followers_count)
-    #pprint(user._json)
+    pprint(user._json)
     
     exit()
     statuses = api.user_timeline("elonmusk")

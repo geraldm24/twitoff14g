@@ -28,3 +28,5 @@ if __name__ == "__main__":
     tweet_text = "I love #ArtificialIntelligence"
     tweet_embedding = connection.embed_sentence(tweet_text, model="twitter")
     print(list(tweet_embedding))
+
+    

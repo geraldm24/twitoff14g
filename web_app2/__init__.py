@@ -10,7 +10,7 @@ from web_app2.routes.models import db, migrate
 from web_app2.routes.home_routes import home_routes
 from web_app2.routes.book_routes import book_routes
 from web_app2.routes.twitter_routes import twitter_routes
-#from web_app.routes.stats_routes import stats_routes
+from web_app2.routes.stats_routes import stats_routes
 
 load_dotenv()
 
@@ -31,7 +31,7 @@ def create_app():
     app.register_blueprint(book_routes)
     app.register_blueprint(twitter_routes)
     #app.register_blueprint(admin_routes)
-    #app.register_blueprint(stats_routes)
+    app.register_blueprint(stats_routes)
 
     return app
 
