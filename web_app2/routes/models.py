@@ -16,8 +16,11 @@ class User(db.Model):
     name = db.Column(db.String)
     location = db.Column(db.String)
     followers_count = db.Column(db.Integer)
+    tweets = db.Columns(db._Integer)
     #latest_tweet_id = db.Column(db.BigInteger)
-
+    def __repr__(self):
+        # return f"<User {self.name}"
+        return'<Name: {}>'.format(self.name)
 class Tweet(db.Model):
     id = db.Column(db.BigInteger, primary_key=True)
     user_id = db.Column(db.BigInteger, db.ForeignKey("user.id"))
@@ -25,7 +28,9 @@ class Tweet(db.Model):
     embedding = db.Column(db.PickleType)
 
     user = db.relationship("User", backref=db.backref("tweets", lazy=True))
-
+    def __repr__(self):
+        # return f"<User {self.name}"
+        return'<Tweet: {}>'.format(self.text)
 def parse_records(database_records):
     """
     A helper method for converting a list of database record objects into a list of dictionaries, so they can be returned as JSON
