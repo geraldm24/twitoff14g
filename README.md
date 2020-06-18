@@ -33,7 +33,7 @@ set FLASK_APP=web_app2 flask db init
 set FLASK_APP=web_app2 flask db migrate
 set FLASK_APP=web_app2 flask db upgrade
 
-Deploy ro heroku
+Deploy to heroku
 create a postgres account
 under addons
 add database credentials to your postgressql I used Tableplus
