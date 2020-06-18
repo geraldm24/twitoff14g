@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 
 from .models import User
 from .basilica_service import connection as basilica_connection
@@ -33,8 +35,8 @@ def twitoff_prediction():
     # inputs: embeddings for each tweet
     # labels: screen name for each tweet
 
-    model = RandomForestClassifier(n_estimators=100,random_state=42,max_depth = 16,min_samples_leaf = 14,
-              min_samples_split=8 )
+    model = RandomForestClassifier(random_state=42,max_depth = 16,min_samples_leaf = 14,
+              min_samples_split=8)
 
     user_a = User.query.filter(User.screen_name == screen_name_a).one()
     user_b = User.query.filter(User.screen_name == screen_name_b).one()
@@ -54,15 +56,23 @@ def twitoff_prediction():
     #
     # MAKE PREDICTION
     #
-
+   
     example_embedding = basilica_connection.embed_sentence(tweet_text, model="twitter")
     result = model.predict([example_embedding])
+    print(result)
+    maj_clss = max(set(labels), key=labels.count)
+    y_pred = [maj_clss] * len(embeddings)
+    #predictions = [(value) for value in y_pred]
     screen_name_most_likely = result[0]
+    predictionr = [screen_name_most_likely] * len(embeddings)
+    acc = accuracy_score(y_pred,predictionr)
 
     return render_template("prediction_results.html",
-        screen_name_a=screen_name_a,
-        screen_name_b=screen_name_b,
-        tweet_text=tweet_text,
-        screen_name_most_likely=screen_name_most_likely
+    screen_name_a=screen_name_a,
+    screen_name_b=screen_name_b,
+    screen_name_most_likely = screen_name_most_likely,
+    tweet_text = tweet_text,
+    acc = acc,
+    result = result
+    
     )
-    breakpoint()

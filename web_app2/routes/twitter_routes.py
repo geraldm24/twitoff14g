@@ -12,14 +12,14 @@ def fetch_user_data(screen_name=None):
 
     api = api_client()
     twitter_user = api.get_user(screen_name)
-    statuses = api.user_timeline(screen_name, tweet_mode="extended", count=150)
+    statuses = api.user_timeline(screen_name, tweet_mode="extended", count=200)
     print("STATUSES COUNT:", len(statuses))
 
     #new_book = Book(title=request.form["book_title"], author_id=request.form["author_name"])
     #db.session.add(new_book)
     #db.session.commit()
     # you can run len(db.user.tweets) for the length
-    #
+    ##
     # STORE USER
     #
 
@@ -29,12 +29,12 @@ def fetch_user_data(screen_name=None):
     db_user.name = twitter_user.name
     db_user.location = twitter_user.location
     db_user.followers_count = twitter_user.followers_count
-    db_user.tweets = twitter_user.tweets
+    #db_user.latest_tweet_id = twitter_user.latest_tweet_id
     db.session.add(db_user)
     db.session.commit()
     
     
-    # STORE TWEETS
+    ## STORE TWEETS
     
     all_tweet_texts = [status.full_text for status in statuses]
     embeddings = list(basilica_connection.embed_sentences(all_tweet_texts, model="twitter"))
